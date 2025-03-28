@@ -39,3 +39,12 @@ PGPASSWORD=finalpass psql -h $(minikube ip) -p 30432 -U sendag -d aicldb
 
 # Connect to the pod
 kubectl exec -it <postgres-pod-name> -- bash
+
+# Inside the pod, connect to PostgreSQL
+psql -U sendag 
+
+# List all databases
+\l
+
+# List all users
+\du
