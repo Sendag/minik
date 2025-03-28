@@ -8,10 +8,12 @@ minikube status
 minikube start
 #check minikube pods
 kubectl get pods
-# Apply the ConfigMap
-kubectl apply -f k8s/postgres-init-script-configmap.yaml
 # Apply the Secret
 kubectl apply -f k8s/postgres-secrets.yaml
+# Check environment variables in the pod
+kubectl exec -it <postgres-pod-name> -- env | grep POSTGRES
+# Apply the ConfigMap
+kubectl apply -f k8s/postgres-init-script-configmap.yaml
 # Apply the PVC
 kubectl apply -f k8s/postgres-pvc.yaml
 # Apply the Deployment
@@ -34,3 +36,6 @@ kubectl logs $(kubectl get pods -l app=postgres -o name)
 
 # Test database connection (install psql if needed)
 PGPASSWORD=finalpass psql -h $(minikube ip) -p 30432 -U sendag -d aicldb
+
+# Connect to the pod
+kubectl exec -it <postgres-pod-name> -- bash

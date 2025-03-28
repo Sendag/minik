@@ -14,8 +14,8 @@ data:
         local user=$2
         local password=$3
         echo "  Creating user and database '$database'"
-        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "postgres" <<-EOSQL
-            CREATE USER $user WITH PASSWORD '$password';
+        psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+            CREATE USER "$POSTGRES_USER" WITH PASSWORD "$POSTGRES_PASSWORD";
             CREATE DATABASE $database;
             GRANT ALL PRIVILEGES ON DATABASE $database TO $user;
     EOSQL
