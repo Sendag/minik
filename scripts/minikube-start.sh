@@ -6,6 +6,8 @@
 minikube status
 # If not running
 minikube start
+#check minikube pods
+kubectl get pods
 # Apply the ConfigMap
 kubectl apply -f k8s/postgres-init-script-configmap.yaml
 # Apply the Secret
